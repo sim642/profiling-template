@@ -70,8 +70,10 @@ public class App {
     boardStatesToVisit.push(startingBoard);
     while (!boardStatesToVisit.isEmpty()) {
       GameBoard nowVisiting = boardStatesToVisit.pop();
-      if (nowVisiting.get(destination) == piece)
+      if (nowVisiting.get(destination) == piece) {
+        boardStatesToVisit.clear();
         return true;
+      }
       findNewStatesToVisit(piece, nowVisiting);
     }
     return false;

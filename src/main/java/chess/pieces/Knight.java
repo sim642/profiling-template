@@ -14,6 +14,7 @@ public class Knight implements Piece {
   public Iterable<GameBoard> getValidMoves(GameBoard from) {
     Square myPosition = from.find(this);
     List<Square> allMoves = Arrays.asList(
+        // some moves are missing. that's ok
         myPosition.move(2, 1),
         myPosition.move(2, -1),
         myPosition.move(-2, -1),
