@@ -37,6 +37,7 @@ Browse around in the call trees and identify which method is the most likely one
 Open the code in your IDE and see if you can figure out a way to make it faster.
 Try to fix the application and sample it again to make sure you did something useful.
 Repeat.
+Run the included unit tests to make sure you didn't break the algorithm instead of making it faster.
 
 *What's the difference between sampling and profiling?
 Profiling will measure each and every method call.
