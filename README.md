@@ -46,6 +46,9 @@ Profiling is more precise but much slower.*
 
 ## Monitoring memory usage
 
+Commit your optimized code and restore the original version.
+There are other bugs there that are easier to hunt if the code is slow.
+
 Restart your application and attach JVisualVM to it.
 Open the "Monitor" tab.
 You should see the memory usage graph on the top-right corner.
