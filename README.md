@@ -1,9 +1,8 @@
 # Profiling
 
 In this practice session we will be looking at memory leaks, garbage collection logs and learn how to make applications faster.
-The main tool we'll be using is JVisualVM which is a diagnostic tool bundled with Java.
-
-JVisualVM is usually installed at $JDK_HOME/bin, but some linux distributions do not include it by default (search for package visualvm).
+The main tool we'll be using is JVisualVM.
+Start by downloading it from from https://visualvm.github.io/ and unpacking it somewhere.
 
 Before we continue, quickly read through the template application.
 Don't make any changes (yet)!
