@@ -10,7 +10,7 @@ import org.junit.Test;
 public class ChessTest {
 
     @Test
-    public void testUnreachableBoards() throws Exception {
+    public void testUnreachableBoards() {
         Assert.assertFalse(App.Check.whether(new Knight()).canReach(4, 4).from(0, 1).usingBoardSize(112).run());
         Assert.assertFalse(App.Check.whether(new Knight()).canReach(4, 4).from(0, 1).usingBoardSize(108).run());
         Assert.assertFalse(App.Check.whether(new Knight()).canReach(4, 4).from(0, 1).usingBoardSize(104).run());
@@ -18,7 +18,7 @@ public class ChessTest {
     }
 
     @Test
-    public void testReachableBoards() throws Exception {
+    public void testReachableBoards() {
         Assert.assertTrue(App.Check.whether(new Knight()).canReach(62, 40).from(0, 1).usingBoardSize(112).run());
         Assert.assertTrue(App.Check.whether(new Knight()).canReach(62, 40).from(0, 1).usingBoardSize(108).run());
         Assert.assertTrue(App.Check.whether(new Knight()).canReach(62, 40).from(0, 1).usingBoardSize(104).run());

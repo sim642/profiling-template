@@ -11,7 +11,7 @@ import java.util.List;
 public class Knight implements Piece {
 
   @Override
-  public Iterable<GameBoard> getValidMoves(GameBoard from) {
+  public List<GameBoard> getValidMoves(GameBoard from) {
     Square myPosition = from.find(this);
     List<Square> allMoves = Arrays.asList(
         // some moves are missing. that's ok

@@ -1,7 +1,8 @@
 package chess;
 
 public class Square {
-  public final int rank, file;
+  public final int rank;
+  public final int file;
 
   public Square(int rank, int file) {
     this.rank = rank;
