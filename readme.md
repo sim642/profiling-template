@@ -1,7 +1,7 @@
 # Profiling
 
 In this practice session we will be looking at memory leaks, garbage collection logs and learn how to make applications faster.
-The main tool we'll be using is JVisualVM.
+The main tool we'll be using is VisualVM.
 Start by downloading it from from https://visualvm.github.io/ and unpacking it somewhere.
 
 Before we continue, quickly read through the template application.
@@ -15,16 +15,16 @@ One option would be to read the code and guess which parts are slow.
 You can try it, and your guess will likely be wrong (even if you have years of experience).
 Another option is to add System.currentTimeMillis() calls all over the place, but that takes forever and you still might miss something.
 
-Luckily JVisualVM has got your back.
+Luckily VisualVM has got your back.
 Start it up.
 Next, start the sample chess application.
-Some new entries should appear in JVisualVM's application explorer.
+Some new entries should appear in VisualVM's application explorer.
 If you started the chess app from IntelliJ, then the right entry is for `com.intellij.rt.execution.application.AppMain`.
-Double click on it to hook JVisualVM into it.
+Double click on it to hook VisualVM into it.
 
 To measure the time spent in different methods, select the "Sampler" tab.
 Next, choose to sample CPU.
-JVisualVM is now recording the activity of each of the threads in your app.
+VisualVM is now recording the activity of each of the threads in your app.
 Enter a newline in the chess application so it would start calculating its things.
 
 You can press the "Snapshot" button any time during your application runtime.
@@ -48,7 +48,7 @@ Profiling is more precise but much slower.*
 Commit your optimized code and restore the original version.
 There are other bugs there that are easier to hunt if the code is slow.
 
-Restart your application and attach JVisualVM to it.
+Restart your application and attach VisualVM to it.
 Open the "Monitor" tab.
 You should see the memory usage graph on the top-right corner.
 Try to figure out what it's showing.
@@ -56,7 +56,7 @@ What is it supposed to look like?
 Why does the memory usage keep increasing?
 What is using up all your memory?
 
-The garbage collector is doing its thing and JVisualVM can't help you much with understanding what's going on.
+The garbage collector is doing its thing and VisualVM can't help you much with understanding what's going on.
 Fortunately the JVM itself provides some additional logging.
 Let's turn it on.
 
@@ -86,7 +86,7 @@ How long does it take for the application to explode?
 ## Heap dumps and hunting memory leaks
 
 Remove the -Xmx option from the run configuration and restart the application.
-Have it run for 30sec and then click "Heap Dump" from JVisualVM monitoring tab (right above the GC graph).
+Have it run for 30sec and then click "Heap Dump" from VisualVM monitoring tab (right above the GC graph).
 Taking a heap dump will make a snapshot of the entire heap memory of your application.
 This includes all the objects that have been created and haven't been garbage collected yet.
 
