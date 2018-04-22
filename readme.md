@@ -2,7 +2,10 @@
 
 In this practice session we will be looking at memory leaks, garbage collection logs and learn how to make applications faster.
 The main tool we'll be using is VisualVM.
-Start by downloading it from https://visualvm.github.io/ and unpacking it somewhere.
+Install it now:
+* download and unpack from https://visualvm.github.io/
+* open etc/visualvm.conf and change the line `#visualvm_jdkhome="/path/to/jdk"` - remove the leading `#` and set the path to where the JDK is installed
+* try to run bin/visualvm (.exe in windows)
 
 We'll use the chess application in this repository for our experiments.
 The application checks if a chess piece can be moved to a given location on the game board.
