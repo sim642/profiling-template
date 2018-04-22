@@ -62,7 +62,7 @@ public class GameBoard {
 
     GameBoard gameBoard = (GameBoard) o;
     // there's nothing wrong with deepEquals unless it's called too many times
-    return Arrays.deepEquals(pieces, gameBoard.pieces); 
+    return Arrays.deepEquals(pieces, gameBoard.pieces);
   }
 
   @Override
