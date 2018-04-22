@@ -18,14 +18,14 @@ public class App {
 
             Square start = new Square(0, 1);
             Square destination = new Square(4, 4);
-            boolean canReach = isReachable(size, start, destination);
+            boolean canReach = isReachableByKnight(size, start, destination);
             System.out.println(canReach
                     ? "square IS reachable"
                     : "square IS NOT reachable");
         }
     }
 
-    public static boolean isReachable(int size, Square start, Square destination) {
+    public static boolean isReachableByKnight(int size, Square start, Square destination) {
         Piece piece = new Knight();
         GameBoard board = new GameBoard(size).set(start, piece);
         return isReachable(board, piece, destination);
@@ -47,8 +47,8 @@ public class App {
         return false;
     }
 
-    private static void findNewStatesToVisit(Piece piece, GameBoard from) {
-        for (GameBoard moveResult : piece.getValidMoves(from)) {
+    private static void findNewStatesToVisit(Piece piece, GameBoard board) {
+        for (GameBoard moveResult : piece.getValidMovesFrom(board)) {
             if (shouldVisit(moveResult))
                 boardStatesToVisit.add(moveResult);
         }

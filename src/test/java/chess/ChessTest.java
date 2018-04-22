@@ -12,19 +12,19 @@ public class ChessTest {
     public void testUnreachableBoards() {
         Square start = new Square(0, 1);
         Square destination = new Square(4, 4);
-        Assert.assertFalse(App.isReachable(32, start, destination));
-        Assert.assertFalse(App.isReachable(28, start, destination));
-        Assert.assertFalse(App.isReachable(24, start, destination));
-        Assert.assertFalse(App.isReachable(20, start, destination));
+        Assert.assertFalse(App.isReachableByKnight(32, start, destination));
+        Assert.assertFalse(App.isReachableByKnight(28, start, destination));
+        Assert.assertFalse(App.isReachableByKnight(24, start, destination));
+        Assert.assertFalse(App.isReachableByKnight(20, start, destination));
     }
 
     @Test
     public void testReachableBoards() {
         Square start = new Square(0, 1);
         Square destination = new Square(4, 5);
-        Assert.assertTrue(App.isReachable(32, start, destination));
-        Assert.assertTrue(App.isReachable(28, start, destination));
-        Assert.assertTrue(App.isReachable(24, start, destination));
-        Assert.assertTrue(App.isReachable(20, start, destination));
+        Assert.assertTrue(App.isReachableByKnight(32, start, destination));
+        Assert.assertTrue(App.isReachableByKnight(28, start, destination));
+        Assert.assertTrue(App.isReachableByKnight(24, start, destination));
+        Assert.assertTrue(App.isReachableByKnight(20, start, destination));
     }
 }

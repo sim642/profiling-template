@@ -4,20 +4,17 @@ import java.util.Arrays;
 
 public class GameBoard {
 
-    private final Piece[][] pieces;
+    private final Piece[] pieces;
     private final int size;
 
     public GameBoard(int size) {
         this.size = size;
-        this.pieces = new Piece[size][size];
+        this.pieces = new Piece[size * size];
     }
 
     private GameBoard(GameBoard original) {
         this.size = original.size;
-        this.pieces = new Piece[size][];
-        for (int i = 0; i < size; i++) {
-            pieces[i] = original.pieces[i].clone();
-        }
+        this.pieces = original.pieces.clone();
     }
 
     public int getSize() {
@@ -25,22 +22,20 @@ public class GameBoard {
     }
 
     public Piece get(Square position) {
-        return pieces[position.rank][position.file];
+        return pieces[position.rank * size + position.file];
     }
 
     public Square find(Piece piece) {
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                if (pieces[i][j] == piece)
-                    return new Square(i, j);
-            }
+        for (int i = 0; i < pieces.length; i++) {
+            if (pieces[i] == piece)
+                return new Square(i / size, i % size);
         }
         return null;
     }
 
     public GameBoard set(Square position, Piece piece) {
         GameBoard copy = new GameBoard(this);
-        copy.pieces[position.rank][position.file] = piece;
+        copy.pieces[position.rank * size + position.file] = piece;
         return copy;
     }
 
@@ -48,8 +43,8 @@ public class GameBoard {
         if (from.equals(to))
             return this;
         GameBoard copy = new GameBoard(this);
-        copy.pieces[to.rank][to.file] = copy.pieces[from.rank][from.file];
-        copy.pieces[from.rank][from.file] = null;
+        copy.pieces[to.rank * size + to.file] = copy.pieces[from.rank * size + from.file];
+        copy.pieces[from.rank * size + from.file] = null;
         return copy;
     }
 
@@ -61,12 +56,11 @@ public class GameBoard {
             return false;
 
         GameBoard gameBoard = (GameBoard) o;
-        // there's nothing wrong with deepEquals unless it's called too many times
-        return Arrays.deepEquals(pieces, gameBoard.pieces);
+        return Arrays.equals(pieces, gameBoard.pieces);
     }
 
     @Override
     public int hashCode() {
-        return Arrays.deepHashCode(pieces);
+        return Arrays.hashCode(pieces);
     }
 }
