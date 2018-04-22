@@ -24,9 +24,9 @@ There should be an entry for `chess.App`.
 Double click on it to attach VisualVM.
 
 To measure the time spent in different methods, select the "Sampler" tab.
-Next, choose to sample CPU.
+Next, click the sample CPU button.
 VisualVM is now recording the activity of each of the threads in your app.
-Enter a newline in the chess application so it would start calculating its things.
+Press enter in the chess application so it will start calculating its things (output will show "running board size ..."").
 
 Let the application run for at least 15sec.
 Different thread names should appear under the CPU samples tab, including the main thread.
@@ -96,7 +96,18 @@ This allows the application to use at most 80MB of memory.
 Restart the application and check the GC logs.
 How long does it take for the application to explode?
 
+Notice how the garbage collection keeps running more often as the memory fills up.
+Running low on memory is one common cause for performance issues in java applications.
+All the time spent on collecting garbage is time not spent on running the application.
+The fix is to change the application to use less memory or have the application reserve more memory by specifying `-Xmx`.
+
 ## Heap dumps and hunting memory leaks
+
+For some reason, the application is using increasingly more memory as it runs.
+This hints that there may be a memory leak - unused object keep piling up somewhere and are not properly garbage collected.
+There are some common cases that can cause a memory leak:
+* some object with a long lifetime is keeping references to too many objects
+* some static field is keeping references to too many objects
 
 Remove the `-Xmx` option from the VM options and restart the application.
 Have it run for 30sec and then click "Heap Dump" from VisualVM monitoring tab (right above the GC graph).
