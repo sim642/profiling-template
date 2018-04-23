@@ -26,15 +26,16 @@ public class App {
     }
 
     public static boolean isReachableByKnight(int size, Square start, Square destination) {
+        App app = new App();
         Piece piece = new Knight();
         GameBoard board = new GameBoard(size).set(start, piece);
-        return isReachable(board, piece, destination);
+        return app.isReachable(board, piece, destination);
     }
 
-    private static List<GameBoard> visitedBoardStates = new ArrayList<>();
-    private static Deque<GameBoard> boardStatesToVisit = new ArrayDeque<>();
+    private List<GameBoard> visitedBoardStates = new ArrayList<>();
+    private Deque<GameBoard> boardStatesToVisit = new ArrayDeque<>();
 
-    private static boolean isReachable(GameBoard startingBoard, Piece piece, Square destination) {
+    private boolean isReachable(GameBoard startingBoard, Piece piece, Square destination) {
         boardStatesToVisit.push(startingBoard);
         while (!boardStatesToVisit.isEmpty()) {
             GameBoard nowVisiting = boardStatesToVisit.pop();
@@ -47,14 +48,14 @@ public class App {
         return false;
     }
 
-    private static void findNewStatesToVisit(Piece piece, GameBoard board) {
+    private void findNewStatesToVisit(Piece piece, GameBoard board) {
         for (GameBoard moveResult : piece.getValidMovesFrom(board)) {
             if (shouldVisit(moveResult))
                 boardStatesToVisit.add(moveResult);
         }
     }
 
-    private static boolean shouldVisit(GameBoard candidate) {
+    private boolean shouldVisit(GameBoard candidate) {
         if (visitedBoardStates.contains(candidate))
             return false;
         visitedBoardStates.add(candidate);
