@@ -3,9 +3,9 @@ package chess;
 import chess.pieces.Knight;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Deque;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class App {
 
@@ -31,7 +31,7 @@ public class App {
         return isReachable(board, piece, destination);
     }
 
-    private static List<GameBoard> visitedBoardStates = new ArrayList<>();
+    private static Set<GameBoard> visitedBoardStates = new HashSet<>();
     private static Deque<GameBoard> boardStatesToVisit = new ArrayDeque<>();
 
     private static boolean isReachable(GameBoard startingBoard, Piece piece, Square destination) {
