@@ -1,20 +1,21 @@
 package chess;
 
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GameBoard {
 
-    private final Piece[] pieces;
+    private final Map<Square, Piece> pieces; // almost all positions were null, use map to only store existing (sparse)
     private final int size;
 
     public GameBoard(int size) {
         this.size = size;
-        this.pieces = new Piece[size * size];
+        this.pieces = new HashMap<>();
     }
 
     private GameBoard(GameBoard original) {
         this.size = original.size;
-        this.pieces = original.pieces.clone();
+        this.pieces = new HashMap<>(original.pieces); // copy map to avoid changing original
     }
 
     public int getSize() {
@@ -22,20 +23,22 @@ public class GameBoard {
     }
 
     public Piece get(Square position) {
-        return pieces[position.rank * size + position.file];
+        return pieces.get(position);
     }
 
     public Square find(Piece piece) {
-        for (int i = 0; i < pieces.length; i++) {
-            if (pieces[i] == piece)
-                return new Square(i / size, i % size);
+        // can't get by value from map, loop over entries instead, not a problem here since always single entry
+        // to be even more efficient, use bimap (two maps), or change everything to use one-way get only
+        for (Map.Entry<Square, Piece> squarePieceEntry : pieces.entrySet()) {
+            if (squarePieceEntry.getValue().equals(piece))
+                return squarePieceEntry.getKey();
         }
         return null;
     }
 
     public GameBoard set(Square position, Piece piece) {
         GameBoard copy = new GameBoard(this);
-        copy.pieces[position.rank * size + position.file] = piece;
+        copy.pieces.put(position, piece);
         return copy;
     }
 
@@ -43,8 +46,8 @@ public class GameBoard {
         if (from.equals(to))
             return this;
         GameBoard copy = new GameBoard(this);
-        copy.pieces[to.rank * size + to.file] = copy.pieces[from.rank * size + from.file];
-        copy.pieces[from.rank * size + from.file] = null;
+        copy.pieces.put(to, copy.pieces.get(from));
+        copy.pieces.remove(from);
         return copy;
     }
 
@@ -56,11 +59,11 @@ public class GameBoard {
             return false;
 
         GameBoard gameBoard = (GameBoard) o;
-        return Arrays.equals(pieces, gameBoard.pieces);
+        return pieces.equals(gameBoard.pieces);
     }
 
     @Override
     public int hashCode() {
-        return Arrays.hashCode(pieces);
+        return pieces.hashCode();
     }
 }
